@@ -1,0 +1,15 @@
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
+import "./styles.css";
+import "./feed.css";
+import "./experience-list.css";
+import "./featured-work.css";
+import "./portfolio-masonry.css";
+import "./design-polish.css";
+import "./work-format.css";
+import "./masonry-flow.css";
+import "./project-modal.css";
+import "./modal-layout.css";
+import "./admin.css";
+createRoot(document.getElementById("root")).render(<StrictMode><App /></StrictMode>);

@@ -1,0 +1,1 @@
+.modal-panel{min-height:min(88svh,960px)}.modal-copy{align-self:stretch!important;display:flex;flex-direction:column;padding-top:clamp(42px,7vh,88px)!important}.modal-copy .project-facts{margin-top:auto}.modal-copy .tags{margin-top:28px}@media(max-width:560px){.modal-panel{min-height:0}.modal-copy{padding-top:25px!important}.modal-copy .project-facts{margin-top:28px}}
