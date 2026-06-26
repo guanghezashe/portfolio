@@ -33,10 +33,13 @@ function WorkMedia({ project, onFormat }) {
         src={shouldLoad ? (project.fileUrl || project.src) : undefined}
         poster={project.coverUrl || project.poster}
         muted
+        loop
+        autoPlay
         playsInline
         preload="metadata"
         aria-label={project.title}
         onLoadedMetadata={(event) => onFormat(formatFromDimensions("video", event.currentTarget.videoWidth, event.currentTarget.videoHeight))}
+        onLoadedData={(event) => event.currentTarget.play().catch(() => {})}
       />
     );
   }

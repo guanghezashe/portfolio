@@ -10,6 +10,31 @@ const previewSource = (project) => {
   return project.previewSrc || project.coverUrl || project.src || "";
 };
 
+function CardMedia({ project, rowIndex }) {
+  if (project.media === "video") {
+    return (
+      <video
+        src={project.fileUrl || project.src}
+        poster={project.coverUrl || project.poster}
+        muted
+        loop
+        autoPlay
+        playsInline
+        preload="metadata"
+        aria-label={project.title}
+        onLoadedData={(event) => event.currentTarget.play().catch(() => {})}
+      />
+    );
+  }
+
+  const preview = previewSource(project);
+  return preview ? (
+    <img src={preview} alt={project.title} loading={rowIndex > 0 ? "lazy" : "eager"} decoding="async" />
+  ) : (
+    <span className="film-card-placeholder" aria-hidden="true" />
+  );
+}
+
 export default function FeaturedCarousel({ projects, onSelect }) {
   const rowRefs = useRef([]);
   const frameRef = useRef(null);
@@ -161,11 +186,7 @@ export default function FeaturedCarousel({ projects, onSelect }) {
                     aria-label={`Open project: ${project.title}`}
                     onClick={() => openProject(project)}
                   >
-                    {previewSource(project) ? (
-                      <img src={previewSource(project)} alt={project.title} loading={rowIndex > 0 ? "lazy" : "eager"} decoding="async" />
-                    ) : (
-                      <span className="film-card-placeholder" aria-hidden="true" />
-                    )}
+                    <CardMedia project={project} rowIndex={rowIndex} />
                   </button>
                 ))}
               </div>
