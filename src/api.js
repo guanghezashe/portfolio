@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import { staticCategories, staticWorks } from "./staticWorks";
 
 const authKey = "portfolio_admin_token";
+const allCategory = "全部";
+
 const normalize = (work) => ({
   ...work,
   id: String(work.id),
@@ -40,20 +43,26 @@ export async function fetchCategories() {
 }
 
 export function useWorks() {
-  const [works, setWorks] = useState([]);
-  const [categories, setCategories] = useState(["全部"]);
+  const [works, setWorks] = useState(staticWorks);
+  const [categories, setCategories] = useState([allCategory, ...staticCategories]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const useStaticWorks = (message = "") => {
+    setWorks(staticWorks);
+    setCategories([allCategory, ...staticCategories]);
+    setError(message);
+  };
 
   const reload = async () => {
     setLoading(true);
     try {
       const [nextWorks, nextCategories] = await Promise.all([fetchWorks(), fetchCategories()]);
       setWorks(nextWorks);
-      setCategories(["全部", ...nextCategories]);
+      setCategories([allCategory, ...nextCategories]);
       setError("");
     } catch (caught) {
-      setError(caught.message || "API unavailable");
+      useStaticWorks(caught.message || "API unavailable");
     } finally {
       setLoading(false);
     }
