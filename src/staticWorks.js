@@ -1,8 +1,16 @@
-const modules = import.meta.glob("./assets/gallery/**/*.{jpg,jpeg,png,webp,gif,mp4,mov,webm}", {
+const imageModules = import.meta.glob("./assets/gallery/**/*.{jpg,jpeg,png,webp,gif}", {
   eager: true,
   query: "?url",
   import: "default",
 });
+
+const videoModules = import.meta.glob("./assets/videos-web/**/*.{mp4,webm}", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
+
+const modules = { ...imageModules, ...videoModules };
 
 const categoryOrder = ["AIGC", "产品视频", "卖点动态", "场景渲染", "活动KV", "电商详情"];
 const videoExtensions = new Set(["mp4", "mov", "webm"]);

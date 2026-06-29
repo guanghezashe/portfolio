@@ -1,9 +1,11 @@
+import resumeUrl from "../uploads/docs/chen-weiguang-resume.docx?url";
+
 export const profile = {
   name: "陈伟光",
   englishName: "WEIGUANG CHEN",
   email: "1533626191@qq.com",
   phone: "13605607552",
-  resume: "/uploads/docs/chen-weiguang-resume.docx",
+  resume: resumeUrl,
 };
 
 export const capabilities = [
